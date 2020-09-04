@@ -10,7 +10,7 @@ Two different populations of a marine species : one from New Jersey and one from
 25 individuals/ population.
 4 libraries of pooled DNA from these 25 individals/ population.
 2 replicates for each library. 
-Think of it as 4 samples, 2 replicates each; so 8 samples in total per population.
+Think of it as 4 samples, 2 replicates each; so 8 samples in total.
 
 And 2 runs. so really, 16 samples. (because run 1 had low yield)
 
