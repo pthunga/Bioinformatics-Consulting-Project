@@ -1,3 +1,4 @@
+Data is present @ home5/pthunga/consultingProject/run1 home5/pthunga/consultingProject/run2
 ### Rename files 
 
 All files were renamed to include run information. Since everything was run on the same lane, lane info was removed. 
