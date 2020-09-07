@@ -32,5 +32,14 @@ done
 
 ### call this script using: ./rename.sh /path/to/file <insert run #>
 ```
+### Quality Control
 
+Fastqc on the cluster didn't work. Throws a java runtime error. 
+```
+JRE version: OpenJDK Runtime Environment (9.0) (build 9-internal+0-2016-04-14-195246.buildd.src)
+# Java VM: OpenJDK 64-Bit Server VM (9-internal+0-2016-04-14-195246.buildd.src, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjava.so+0x1d009]  JNU_GetEnv+0x19
+ ```
+ 
 
