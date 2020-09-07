@@ -45,7 +45,7 @@ JRE version: OpenJDK Runtime Environment (9.0) (build 9-internal+0-2016-04-14-19
  Installed and unzipped v0.11.9 @ /home5/pthunga/consultingProject/packages
  
  ```
- #/bin/bash
+#/bin/bash
 
 #code to run QC
 
@@ -64,4 +64,4 @@ done
 
 ### call this script using: ./qc.sh /path/to/data /path/to/outputdir
  ```
- 
+ weirdly, this doesn't work if I sbatch it. Looks like some kind of a path or permission issue. I've emailed Chris to see how I can fix it. 
