@@ -65,3 +65,7 @@ done
 ### call this script using: ./qc.sh /path/to/data /path/to/outputdir
  ```
  weirdly, this doesn't work if I sbatch it. Looks like some kind of a path or permission issue. I've emailed Chris to see how I can fix it. 
+ 
+ Chris' response:
+ >When you submit a script to slurm using sbatch, slurm copies that script to the node on which it will run. It copies it to a slurm-specific directory at /var/lib/slurm-llnl/slurmd/jobNNNNN where NNNNN is the slurm job number. By default the fastqc (Perl) script sets the Java CLASSPATH variable from the location of the fastqc script itself, so when you run fastqc directly through sbatch the CLASSPATH is set to be /var/lib/slurm-llnl/... which is not at all where the Java class code is found.
+
