@@ -34,7 +34,7 @@ done
 ```
 ### Quality Control
 
-Fastqc(version v0.11.8) on the cluster didn't work. Throws this java runtime error:
+Fastqc(version v0.11.8) on the cluster didn't work. Throws this java runtime error: (The full log is saved under the qcReport directory)
 
 ```
 JRE version: OpenJDK Runtime Environment (9.0) (build 9-internal+0-2016-04-14-195246.buildd.src)
