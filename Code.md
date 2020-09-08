@@ -45,6 +45,7 @@ JRE version: OpenJDK Runtime Environment (9.0) (build 9-internal+0-2016-04-14-19
  Installed and unzipped v0.11.9 @ /home5/pthunga/consultingProject/packages
  
  ```
+# script name: qc.sh
 #/bin/bash
 
 #code to run QC
