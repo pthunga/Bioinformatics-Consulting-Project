@@ -69,4 +69,10 @@ done
  
  Chris' response:
  >When you submit a script to slurm using sbatch, slurm copies that script to the node on which it will run. It copies it to a slurm-specific directory at /var/lib/slurm-llnl/slurmd/jobNNNNN where NNNNN is the slurm job number. By default the fastqc (Perl) script sets the Java CLASSPATH variable from the location of the fastqc script itself, so when you run fastqc directly through sbatch the CLASSPATH is set to be /var/lib/slurm-llnl/... which is not at all where the Java class code is found.
+ 
+(That makes sense, figure out where to put sbatch -- within or outside script)
+
+QC reports are present @ /home5/pthunga/consultingProject/qcReport. There should be a multiqc report somewhere in that directory. 
+
+Looks like there is some nextera adapter contamination.
 
