@@ -76,3 +76,11 @@ QC reports are present @ /home5/pthunga/consultingProject/qcReport. There should
 
 Looks like there is some nextera adapter contamination.
 
+### Trimming
+
+Using Trimgalore 
+```
+<trim_galore --paired --nextera myRead_S1_L001_R1_001.fastq myRead_S1_L001_R2_001.fastq>
+```
+
+
