@@ -79,7 +79,7 @@ Looks like there is some nextera adapter contamination.
 ### Trimming
 
 Using Trimgalore 
-```
+```bash
 #script name: trim.sh
 #/bin/bash
 
