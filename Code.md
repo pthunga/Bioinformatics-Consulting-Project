@@ -80,7 +80,23 @@ Looks like there is some nextera adapter contamination.
 
 Using Trimgalore 
 ```
-<trim_galore --paired --nextera myRead_S1_L001_R1_001.fastq myRead_S1_L001_R2_001.fastq>
+#script name: trim.sh
+#/bin/bash
+
+export PATH="home5/pthunga/consultingProject/packages/TrimGalore-0.6.6:$PATH"
+WORKDIR=$1
+cd ${WORKDIR}
+
+declare -a fwdArray=($(ls ${WORKDIR}/R*n01*))
+declare -a revArray=($(ls ${WORKDIR}/R*n02*))
+arrayLength=${#fwdArray[*]}
+
+for (( i=0; i<${arrayLength}; i++ ));
+do
+    sbatch trim_galore --paired --nextera  ${fwdArray[$i]} ${revArray[$i]}
+done
+
+#call script using ./trim.sh /path/to/data 
 ```
 
 
