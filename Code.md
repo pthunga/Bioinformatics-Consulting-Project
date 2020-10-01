@@ -2,7 +2,7 @@ Data is present @ home5/pthunga/consultingProject/run1 home5/pthunga/consultingP
 ### Rename files 
 
 All files were renamed to include run information. Since everything was run on the same lane, lane info was removed. 
-4 libraries in total(Bay1, Bay2, LB1, LB2). Each library has a duplicate (n01 or n02). All libraries were run two times (R1 and R2)
+4 libraries in total(Bay1, Bay2, LB1, LB2). Paired end reads (n01 or n02). All libraries were run two times (R1 and R2)
 
 ```bash
 #script name: rename.sh
