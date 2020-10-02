@@ -101,6 +101,6 @@ done
 ```
 
 ( I forgot to add the fastqc tag. Ran FASTQC separately again).
-Trimmed reads are present under home5/pthunga/consultingProject/data/trimmedReads
-Trimming reports are present under home5/pthunga/consultingProject/data/trimmedReads/trimmingReports
+Trimmed reads are present under home5/pthunga/consultingProject/data/trimmedReads  
+Trimming reports are present under home5/pthunga/consultingProject/data/trimmedReads/trimmingReports  
 fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
