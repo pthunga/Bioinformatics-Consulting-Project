@@ -70,7 +70,8 @@ done
  Chris' response:
  >When you submit a script to slurm using sbatch, slurm copies that script to the node on which it will run. It copies it to a slurm-specific directory at /var/lib/slurm-llnl/slurmd/jobNNNNN where NNNNN is the slurm job number. By default the fastqc (Perl) script sets the Java CLASSPATH variable from the location of the fastqc script itself, so when you run fastqc directly through sbatch the CLASSPATH is set to be /var/lib/slurm-llnl/... which is not at all where the Java class code is found.
  
-(That makes sense, figure out where to put sbatch -- within or outside script)
+(That makes sense, bottom line: to be able to use sbatch with fastqc, you have to set the classpath for Java in your environment.)
+I just ran it directly on the kernel. Tedious, but does the job.
 
 QC reports are present @ /home5/pthunga/consultingProject/qcReport. There should be a multiqc report somewhere in that directory. 
 
@@ -93,10 +94,13 @@ arrayLength=${#fwdArray[*]}
 
 for (( i=0; i<${arrayLength}; i++ ));
 do
-    sbatch trim_galore --paired --nextera  ${fwdArray[$i]} ${revArray[$i]}
+    sbatch trim_galore --paired --nextera --fastqc ${fwdArray[$i]} ${revArray[$i]}
 done
 
 #call script using ./trim.sh /path/to/data 
 ```
 
-
+( I forgot to add the fastqc tag. Ran FASTQC separately again).
+Trimmed reads are present under home5/pthunga/consultingProject/data/trimmedReads
+Trimming reports are present under home5/pthunga/consultingProject/data/trimmedReads/trimmingReports
+fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
