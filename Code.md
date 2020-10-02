@@ -1,4 +1,4 @@
-Data is present @ home5/pthunga/consultingProject/run1 home5/pthunga/consultingProject/run2
+Data is present @ home5/pthunga/consultingProject/data
 ### Rename files 
 
 All files were renamed to include run information. Since everything was run on the same lane, lane info was removed. 
@@ -100,7 +100,9 @@ done
 #call script using ./trim.sh /path/to/data 
 ```
 
-( I forgot to add the fastqc tag. Ran FASTQC separately again).
+( I forgot to add the fastqc tag. Ran FASTQC separately again). 
 Trimmed reads are present under home5/pthunga/consultingProject/data/trimmedReads  
 Trimming reports are present under home5/pthunga/consultingProject/data/trimmedReads/trimmingReports  
 fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
+
+Files with _val_ tag are the trimmed files. (val is the same as n; refers to F/R reads)
