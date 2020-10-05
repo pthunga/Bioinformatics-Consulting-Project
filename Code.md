@@ -106,3 +106,12 @@ Trimming reports are present under home5/pthunga/consultingProject/data/trimmedR
 fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
 
 Files with _val_ tag are the trimmed files. (val is the same as n; refers to F/R reads)
+
+### Mapping
+
+The reference genome "sben_ref.fa" is present under /data/trimmedReads and has been indexed using bwa. 
+```
+#/bin/bash
+bwa index sben_ref.fa
+```
+
