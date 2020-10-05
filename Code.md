@@ -110,7 +110,7 @@ Files with _val_ tag are the trimmed files. (val is the same as n; refers to F/R
 ### Mapping
 
 The reference genome "sben_ref.fa" is present under /data/trimmedReads and has been indexed using bwa. 
-```
+```bash
 #/bin/bash
 bwa index sben_ref.fa
 ```
