@@ -115,3 +115,21 @@ The reference genome "sben_ref.fa" is present under /data/trimmedReads and has b
 bwa index sben_ref.fa
 ```
 
+```bash
+#script name: < >
+#/bin/bash
+
+#export PATH="home5/pthunga/consultingProject/packages/TrimGalore-0.6.6:$PATH"
+WORKDIR=$1
+cd ${WORKDIR}
+
+declare -a fwdArray=($(ls ${WORKDIR}/R*n01*))
+declare -a revArray=($(ls ${WORKDIR}/R*n02*))
+arrayLength=${#fwdArray[*]}
+
+for (( i=0; i<${arrayLength}; i++ ));
+do
+    < extract output name>
+    sbatch bwa mem -t 8 -M /home5/pthunga/consultingProject/data/trimmedReads/sben_ref.fa ${fwdArray[$i]} ${revArray[$i]} > output.sam
+done
+
