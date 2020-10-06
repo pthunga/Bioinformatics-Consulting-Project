@@ -106,6 +106,29 @@ Trimming reports are present under home5/pthunga/consultingProject/data/trimmedR
 fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
 
 Files with _val_ tag are the trimmed files. (val is the same as n; refers to F/R reads)
+USing fastp
+```
+#/bin/bash
+
+WORKDIR=$1
+OUTDIR=$2
+cd ${WORKDIR}
+
+declare -a fwdArray=($(ls ${WORKDIR}/R*n01*))
+declare -a revArray=($(ls ${WORKDIR}/R*n02*))
+arrayLength=${#fwdArray[*]}
+
+for (( i=0; i<${arrayLength}; i++ ));
+do
+     FR=${fwdArray[$i]:51:11}
+     RR=${revArray[$i]:51:11}
+     fastp -i ${fwdArray[$i]} -I ${revArray[$i]} -o ${OUTDIR}/${FR}.fastq.gz -O ${OUTDIR}/${RR}.fastq.gz --dont_overwrite -A -g -h ${FR}.html -w 8 -j ${FR}.json
+done
+
+```
+
+
+
 
 ### Mapping
 
