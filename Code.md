@@ -106,7 +106,8 @@ Trimming reports are present under home5/pthunga/consultingProject/data/trimmedR
 fastqc of trimmed reads is present under home5/pthunga/consultingProject/qcReport/trimmedReadsReport
 
 Files with _val_ tag are the trimmed files. (val is the same as n; refers to F/R reads)
-USing fastp
+
+Using fastp
 ```
 #/bin/bash
 
@@ -124,25 +125,26 @@ do
      RR=${revArray[$i]:51:11}
      fastp -i ${fwdArray[$i]} -I ${revArray[$i]} -o ${OUTDIR}/${FR}.fastq.gz -O ${OUTDIR}/${RR}.fastq.gz --dont_overwrite -A -g -h ${FR}.html -w 8 -j ${FR}.json
 done
-
+#call this script as ./fastp /pathotodata /pathtoOUTdir
 ```
 
-
-
+fastp trimming didn't really change anything. the polyG tails are still present at around 74-76 bp. That is probably the reason why the per base scores go up in the end.  
+fastp trimmed reads are present under data/trimmedReads/fastptrimmed 
+The html reports and json files are presented under data/trimmedReads/fastptrimmed/fastptrimmedReports 
+The final trimmed file names are of the format <R#_n0#_Bay#> or <R#_n0#_LB#_>
 
 ### Mapping
 
-The reference genome "sben_ref.fa" is present under /data/trimmedReads and has been indexed using bwa. 
+The reference genome "ref_sben.fa" is present under /data and has been indexed using bwa. 
 ```bash
 #/bin/bash
-bwa index sben_ref.fa
+bwa index ref_sben.fa
 ```
 
 ```bash
-#script name: < >
-#/bin/bash
+#script name: mapReads.sh
+#!/bin/bash
 
-#export PATH="home5/pthunga/consultingProject/packages/TrimGalore-0.6.6:$PATH"
 WORKDIR=$1
 cd ${WORKDIR}
 
@@ -152,7 +154,11 @@ arrayLength=${#fwdArray[*]}
 
 for (( i=0; i<${arrayLength}; i++ ));
 do
-    < extract output name>
-    sbatch bwa mem -t 8 -M /home5/pthunga/consultingProject/data/trimmedReads/sben_ref.fa ${fwdArray[$i]} ${revArray[$i]} > output.sam
+    R=${fwdArray[$i]:64:2}
+    POP=${fwdArray[$i]:70:5}
+    output="/home5/pthunga/consultingProject/data/mappedReads/$R$POP.sam"
+    bwa mem -t 8 -M /home5/pthunga/consultingProject/data/ref_sben.fa ${fwdArray[$i]} ${revArray[$i]} > $output
 done
+call this script as sbatch ./mapReads.sh /pathtodata
+```
 
