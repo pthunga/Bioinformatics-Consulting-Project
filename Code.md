@@ -161,4 +161,5 @@ do
 done
 call this script as sbatch ./mapReads.sh /pathtodata
 ```
-
+SAM files will be written to data/mappedReads 
+slurm output is being written to consultingProject/scripts. <Edit this part after you move it> 
