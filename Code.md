@@ -163,3 +163,7 @@ call this script as sbatch ./mapReads.sh /pathtodata
 ```
 SAM files will be written to data/mappedReads 
 slurm output is being written to consultingProject/scripts. <Edit this part after you move it> 
+        
+I didn't add ReadGroup info the first time. I think it might be necessary when handling merged files so Rerunning alignment with readgroup info. These files will be saved under /mappedReads/readGroup/
+
+SAM files without RG tags are being converted to bam, will remove these sam files after conversion. 
