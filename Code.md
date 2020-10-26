@@ -156,8 +156,9 @@ for (( i=0; i<${arrayLength}; i++ ));
 do
     R=${fwdArray[$i]:64:2}
     POP=${fwdArray[$i]:70:5}
-    output="/home5/pthunga/consultingProject/data/mappedReads/$R$POP.sam"
-    bwa mem -t 8 -M /home5/pthunga/consultingProject/data/ref_sben.fa ${fwdArray[$i]} ${revArray[$i]} > $output
+    id=${POP:1:4}
+    output="/home5/pthunga/consultingProject/data/mappedReads/readGroup/$R$POP.sam"
+    bwa mem -t 8 -M -R $(echo "@RG\tID:$id.$R\tSM:$id\tPL:ILLUMINA") /home5/pthunga/consultingProject/data/ref_sben.fa ${fwdArray[$i]} ${revArray[$i]} > $output
 done
 call this script as sbatch ./mapReads.sh /pathtodata
 ```
@@ -167,3 +168,72 @@ slurm output is being written to consultingProject/scripts. <Edit this part afte
 I didn't add ReadGroup info the first time. I think it might be necessary when handling merged files so Rerunning alignment with readgroup info. These files will be saved under /mappedReads/readGroup/
 
 SAM files without RG tags are being converted to bam, will remove these sam files after conversion. 
+
+files with RG tags are under mappedReads/readGroup
+They have been sorted, index and quality filtered
+
+### Sorting, indexing, filtering (indexing again)
+
+SAM TO bam
+```bash
+
+#!/bin/bash
+
+WORKDIR=$1
+cd ${WORKDIR}
+
+declare -a fwdArray=($(ls ${WORKDIR}/*.sam))
+arrayLength=${#fwdArray[*]}
+
+for (( i=0; i<${arrayLength}; i++ ));
+do
+    in=${fwdArray[$i]:60:7}
+    samtools view -S -b $in.sam > $in.bam
+done
+```
+Sort BAM
+```bash
+#!/bin/bash
+
+
+WORKDIR=$1
+cd ${WORKDIR}
+
+declare -a fwdArray=($(ls ${WORKDIR}/*.bam))
+arrayLength=${#fwdArray[*]}
+
+for (( i=0; i<${arrayLength}; i++ ));
+do
+    in=${fwdArray[$i]:60:7}
+    samtools sort --reference /home5/pthunga/consultingProject/data/ref_sben.fa $WORKDIR/$in.bam -o $WORKDIR/sortedReads/$in.s.bam
+done
+```
+
+Index BAM
+```bash
+#!/bin/bash
+
+WORKDIR=$1
+cd ${WORKDIR}
+
+for f in ${WORKDIR}/*.f.bam
+do
+    samtools index $f
+done
+```
+
+Filter BAM
+```bash
+#!/bin/bash
+
+WORKDIR=$1
+cd ${WORKDIR}
+
+for f in ${WORKDIR}/*.bam
+do
+  len=${#f}
+  op=${f:0:81}
+  samtools view -F 0x04 -q 20 -b $f  > $op.f.bam
+done
+
+```
