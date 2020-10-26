@@ -174,7 +174,7 @@ They have been sorted, index and quality filtered
 
 ### Sorting, indexing, filtering (indexing again)
 
-SAM TO bam
+SAM to bam
 ```bash
 
 #!/bin/bash
@@ -222,7 +222,7 @@ do
 done
 ```
 
-Filter BAM
+Filter BAM (filter out unmapped and quality < 20)
 ```bash
 #!/bin/bash
 
