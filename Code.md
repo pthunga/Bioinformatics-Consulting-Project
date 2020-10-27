@@ -237,3 +237,6 @@ do
 done
 
 ```
+sorted, filtered files have .s.f.bam extensions and are present under mappedReads/readGroup/sortedReads directory. 
+
+Then, mpileup.sh , getsync.sh and fst.sh scripts were run in that particular order. See terminal for scripts
