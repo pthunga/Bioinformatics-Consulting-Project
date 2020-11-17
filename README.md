@@ -13,7 +13,7 @@ Two different populations of a marine species : one from New Jersey and one from
 2 repeated libraries for each population 
 Think of it as 4 samples (bay1, bay2, lb1, lb2), 2 runs; so 8 samples in total. Data for each sample is split across the two runs. 
 
-![data](https://github.com/pthunga/toxpiR-Documentation/blob/master/myTxpScore.PNG)
+![data](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/data.PNG)
 
 Data: Trimmed, barcode sorted. <everything was run on the same lane> 
  
