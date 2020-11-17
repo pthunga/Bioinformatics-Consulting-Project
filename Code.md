@@ -285,3 +285,69 @@ perl /home5/pthunga/consultingProject/packages/popoolation2_1201/fst-sliding.pl 
 ```
 
 
+### R script for making plots 
+
+```
+setwd("C:/Users/pthunga/Documents/Class/Bioinfo Consulting/Analysis")
+fst = read.table("p1_p2.filtered.fst")
+
+library(stringr)
+fst.est = as.numeric(str_remove(fst[,6],"1:2="))
+fst[,6] = fst.est
+rm(fst.est)
+fst = fst[which(fst$V6 !=0),]
+colnames(fst) = c("Chr","Pos","Window Size","Cov fraction","Avg min cov","Fst")
+#hist(fst$Fst, breaks = 50, main = "Histogram of Pairwise Fst", xlab = "Fst")
+
+################### Get top 1%
+x <- fst$Fst
+p90 <- quantile(x = x,probs = .99)
+want <- x[x > p90]
+#length(want)
+
+high.fst = fst[fst$Fst > range(want)[1],]
+high.fst$snp = row.names(high.fst)
+highlight.snps = high.fst[which(high.fst$Fst > range(want)[1]),7]
+##################### Plot histogram
+
+library(ggplot2)
+full = ggplot(fst, aes(x=Fst)) + 
+  geom_histogram(aes(y=..density..),binwidth = 0.01, colour="black", fill="white")+
+  geom_density(alpha=.2, fill="#FF6666") + geom_vline(aes(xintercept=range(want)[1]),
+                                                      color="orange", linetype="dashed", size=0.5) + 
+  labs(title="Histogram of pairwise Fst",x="Fst", y = "Density") + 
+   theme(plot.title = element_text(hjust = 0.5))
+library(plotly)
+
+high = ggplot(high.fst, aes(x=Fst)) + 
+  geom_histogram(aes(y=..density..),binwidth = 0.01, colour="black", fill="white")+
+  geom_density(alpha=.2, fill="#FF6666") + labs(title="top 1%",x="Fst", y = "Density") + 
+   theme(plot.title = element_text(hjust = 0.5))
+all = ggplotGrob(high)
+
+final = full + annotation_custom(grob = all , xmin = 0.35, xmax = 1, ymin = 15, ymax = 55)
+final
+#######
+
+
+# hist(fst$Fst, breaks = 50, main = "Histogram of Pairwise Fst", xlab = "Fst")
+# plot(hist(fst$Fst, breaks = 10), main = "Pairwise Fst")
+# hist(high.fst$V6,main = "Histogram of Pairwise Fst", xlab = "Fst")
+
+library(qqman)
+manhattan(gwasResults, chr="CHR", bp="BP", snp="SNP", p="P" )
+
+fst.like.gwas = data.frame(fst[,c(1,2,6)])
+chr = fst.like.gwas[,1]
+chr = gsub('Ch_','',chr)
+chr = as.numeric(chr)
+fst.like.gwas[,1] =  chr
+fst.like.gwas = fst.like.gwas[!is.na(fst.like.gwas$Chr), ]
+fst.like.gwas$snp =rownames(fst.like.gwas)
+
+manhattan(fst.like.gwas, chr="Chr", bp="Pos", p="Fst" , snp= "snp", logp = FALSE, 
+          suggestiveline = range(want)[1], ylab = "Fst", main = "Manhattan-like plot of Fst")
+
+#fst.chr.data$Chr = as.numeric(fst.chr.data$Chr)
+#df = setDT(fst.chr.data, keep.rownames = TRUE)[]
+```
