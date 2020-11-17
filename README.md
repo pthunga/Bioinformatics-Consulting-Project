@@ -23,8 +23,20 @@ Goal: Use Wright's F-statistic to identify alleles/sites that differ in frequenc
 
 ![pipeline](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/pipeline.PNG)
 
+### Quality Control
+
+The raw reads from each sample were first checked for QC using FastQC v0.11.9. Multiqc was used to combine reports from all samples together. 
+The samples passed all QC tests except for Adapter Content, Per base Sequence content and Per base GC content. 
+
+TrimGalore was used to trim Nextera sequence contamination and fastp was used to trim for polyG tails that can occur as a consequence of NextSeq's two dye chemistry. QC reports have been added to drive. 
+
+
 ### Results
 
+Histogram showing the distribution of Fst in all loci. The zoomed-in figure on the top right shows the top 1% of the Fst estimates. 
+
 ![hist](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/histogram.PNG)
+
+The manhattan plot below helps visualize the distribution of Fst across the chromosomes.  Fst is shown on the Y axis and the genomic location on the X axis. Points plotted above the blue horizontal line correspond to the top 1% of the Fst estimates. Region on the chromosome 3 appears to carry several outlier loci.
 
 ![manhattan](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/manhattanplot.PNG)
