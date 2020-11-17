@@ -172,7 +172,7 @@ SAM files without RG tags are being converted to bam, will remove these sam file
 files with RG tags are under mappedReads/readGroup
 They have been sorted, index and quality filtered
 
-### Sorting, indexing, filtering (indexing again)
+### Alignment post-processing
 
 SAM to bam
 ```bash
@@ -237,6 +237,51 @@ do
 done
 
 ```
-sorted, filtered files have .s.f.bam extensions and are present under mappedReads/readGroup/sortedReads directory. 
+Merge all BAM 
+```bash
+#!/bin/bash
 
-Then, mpileup.sh , getsync.sh and fst.sh scripts were run in that particular order. See terminal for scripts
+#!/bin/bash
+
+samtools merge /home5/pthunga/consultingProject/data/mappedReads/readGroup/sortedReads/bay.merged.bam /home5/pthunga/consultingProject/data/mappedReads/readGroup/sortedReads/*Bay*.s.f.bam
+
+samtools merge /home5/pthunga/consultingProject/data/mappedReads/readGroup/sortedReads/lb.merged.bam /home5/pthunga/consultingProject/data/mappedReads/readGroup/sortedReads/*LB*.s.f.bam
+
+done
+
+```
+(sorted, filtered files have .s.f.bam extensions and are present under mappedReads/readGroup/sortedReads directory)
+
+Then, mpileup.sh , getsync.sh and fst.sh scripts were run in that particular order. See terminal for scripts. 
+
+### Variant calling using samtools
+
+```bash
+#!/bin/bash
+
+filelistLoc=$1
+#samtools mpileup -B --bam-list $1/pop1 $1/pop2 > /home5/pthunga/consultingProject/data/popool2/p1_p2.mpileup
+#samtools mpileup -B --bam-list $1/allpop > /home5/pthunga/consultingProject/data/popool2/p1_p2.mpileup
+samtools mpileup -B $1/bay.merged.bam $1/lb.merged.bam > /home5/pthunga/consultingProject/data/popool2/mergedReads/p1_p2.mpileup
+```
+
+### Popoolation2
+
+Make sync files 
+
+```bash
+#!/bin/bash
+
+WORKDIR=$1
+java -ea -Xmx7g -jar /home5/pthunga/consultingProject/packages/popoolation2_1201/mpileup2sync.jar --input $1/p1_p2.mpileup --output $1/p1_p2_java.sync --fastq-type sanger --min-qual 20 --threads 8
+```
+
+Obtain fst
+```bash
+#!/bin/bash
+
+
+perl /home5/pthunga/consultingProject/packages/popoolation2_1201/fst-sliding.pl --input /home5/pthunga/consultingProject/data/popool2/mergedReads/p1_p2_java.sync --output /home5/pthunga/consultingProject/data/popool2/mergedReads/p1_p2.fst --min-count 6 --min-coverage 50 --max-coverage 200 --min-covered-fraction 1 --window-size 1 --step-size 1 --pool-size 25
+```
+
+
