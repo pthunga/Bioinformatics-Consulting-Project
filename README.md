@@ -18,3 +18,7 @@ Think of it as 4 samples (bay1, bay2, lb1, lb2), 2 runs; so 8 samples in total. 
 Data: Trimmed, barcode sorted. <everything was run on the same lane> 
  
 Goal: Use Wright's F-statistic to identify alleles/sites that differ in frequency due to population substructure. 
+
+### Bioinformatics Pipeline
+
+![data](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/pipeline.PNG)
