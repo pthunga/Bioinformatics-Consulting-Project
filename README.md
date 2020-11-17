@@ -5,12 +5,15 @@ We have pool-seq data from pooled individuals in 2 populations and we want to ma
 
 **Overview**:  
 
-Two different populations of a marine species : one from New Jersey and one from California. These populations exhibit slightly different phenotypes with respect to their offspring. (i.e., one makes fewer but bigger babies while the other population makes many but small babies)
+Two different populations of a marine species : one from New Jersey and one from California. These populations exhibit developmental dimorphism. 
 
+### Data handed to us 
 25 individuals/ population.
 4 libraries of pooled DNA from these 25 individals/ population.
-2 replicates for each library. 
-Think of it as 4 samples (bay1, bay2, lb1, lb2), 2 runs; so 8 samples in total.
+2 repeated libraries for each population 
+Think of it as 4 samples (bay1, bay2, lb1, lb2), 2 runs; so 8 samples in total. Data for each sample is split across the two runs. 
+
+![data](https://github.com/pthunga/toxpiR-Documentation/blob/master/myTxpScore.PNG)
 
 Data: Trimmed, barcode sorted. <everything was run on the same lane> 
  
