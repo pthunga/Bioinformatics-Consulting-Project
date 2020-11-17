@@ -21,4 +21,10 @@ Goal: Use Wright's F-statistic to identify alleles/sites that differ in frequenc
 
 ### Bioinformatics Pipeline
 
-![data](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/pipeline.PNG)
+![pipeline](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/pipeline.PNG)
+
+### Results
+
+![hist](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/histogram.PNG)
+
+![manhattan](https://github.com/pthunga/Bioinformatics-Consulting-Project/blob/master/manhattanplot.PNG)
