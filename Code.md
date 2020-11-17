@@ -1,3 +1,5 @@
+This is to document all the code that I used for obtaining Fst estimates and plotting them. 
+
 Data is present @ home5/pthunga/consultingProject/data
 ### Rename files 
 
